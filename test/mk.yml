@@ -1,5 +1,5 @@
-config: #default empty
-  script_dir: #default: cwd
+settings: #default empty
+  # scripts_dir: #default: cwd
 
 tasks:
-  exec: cat ../index.js
+  exec: echo outer pizza
