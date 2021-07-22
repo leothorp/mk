@@ -7,12 +7,12 @@ var glob = require("glob");
 //xplat: https://shapeshed.com/writing-cross-platform-node/#cross-platform-if-you-want
 const { spawnSync } = require("child_process");
 const getFiles = (dir) => {
-    console.log('dUR', dir)
-  const results = glob.sync(`*.sh`, { cwd: dir });
-  console.log(results);
-  return results;
+  const results = glob.sync(`**/*.sh`, { cwd: dir });
+
+  //rel to cwd
+  return results.map((r) => path.join(path.relative(process.cwd(), dir), r));
 };
-export const toObj = (arr, keySelector = identity, valSelector = identity) => {
+const toObj = (arr, keySelector = identity, valSelector = identity) => {
   const toSelector = (arg) => (typeof arg === "function" ? arg : property(arg));
   keySelector = toSelector(keySelector);
   valSelector = toSelector(valSelector);
@@ -57,21 +57,22 @@ const fetchConfigFile = () => {
 };
 
 const normalizeTasks = ({ settings, tasks }) => {
+  console.log(tasks);
   settings = settings || {};
   tasks = tasks || {};
-    const { scripts_dir: scriptsDir = process.cwd() } = settings;
-
-
-
-//TODO(lt): vvv recursive
-    const foundScripts = getFiles(scriptsDir);
-    foundScripts.
-path.basename()
-  return {
-    //TODO(lt): vvv handle when running from not same dir as mk.yml
-    settings: { scriptsDir: scripts_dir },
-    tasks,
-  };
+  //TODO(lt): vvv handle when running from not same dir as mk.yml
+  const { scripts_dir: scriptsDir = path.join(process.cwd(), "scripts") } =
+    settings;
+  console.log(scriptsDir);
+  //TODO(lt): vvv recursive
+  const foundScripts = getFiles(scriptsDir);
+  const asTasks = toObj(
+    foundScripts,
+    (k) => path.basename(k, ".sh"),
+    //TODO(lt): vvv sec. issue w executable chars in names
+    (k) => `/bin/sh ${k}`
+  );
+  return { ...tasks, ...asTasks };
 };
 
 //TODO(lt): vvv run multiple in sequence ?
@@ -79,15 +80,15 @@ const args = process.argv.slice(2);
 const taskArgs = args.slice(1);
 const rawTask = args[0];
 invariant(!!rawTask, `No task name specified.`);
-const task = rawTask.trim();
+const taskName = rawTask.trim();
 const config = fetchConfigFile();
-const { settings: { scriptsDir }, tasks } = normalizeTasks(config);
-
+const tasks = normalizeTasks(config);
+console.log("tn", taskName, tasks);
 
 const definedTasks = Object.keys(tasks);
-console.log(tasks, "cnf", task);
-invariant(definedTasks.includes(task), "Undefined task:", task);
-const taskVal = tasks[task];
+console.log(tasks, "cnf", taskName);
+invariant(definedTasks.includes(taskName), "Undefined task:", taskName);
+const taskVal = tasks[taskName];
 //TODO(lt): other interpreters
 
 //TODO(lt): vvv handle env vars, test w input
@@ -101,4 +102,3 @@ spawnSync(taskParts[0], taskParts.slice(1), {
 });
 //TODO(lt): check out exec at
 //https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/node_modules/%40npmcli/run-script/lib/run-script-pkg.js#L12
-

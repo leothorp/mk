@@ -1,5 +1,5 @@
 settings: #default empty
-  # scripts_dir: #default: cwd
+  # scripts_dir: ./scripts #default: ./scripts
 
 tasks:
-  exec: echo outer pizza
+  exec: echo orig pizza

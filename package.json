@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "",
-    "test": "cd test && NODE_ENV=development node ../index.js exec howdy"
+    "test": "cd test && NODE_ENV=development node ../index.js ssss"
   },
   "author": "leothorp",
   "license": "MIT",
