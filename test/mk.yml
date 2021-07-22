@@ -1,4 +1,4 @@
 #_config: 
   #mk_root:
    
-exec: echo "larry" && echo "barry"
+exec: cat ../index.js
