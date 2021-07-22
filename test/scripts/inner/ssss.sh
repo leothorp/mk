@@ -1,1 +1,1 @@
-echo inner "pTTTT" $0
+echo inner "pTTTT" $2
