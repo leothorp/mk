@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "yarn-exclude": "bin/mk.js"
+    "mk": "./bin/mk.js"
   },
   "scripts": {
     "start": "",
+    "run-mk": "mk",
     "test": "cd test && NODE_ENV=development node ../index.js ssss"
   },
   "author": "leothorp",

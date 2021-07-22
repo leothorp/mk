@@ -1,0 +1,5 @@
+settings: #default empty
+  scripts_dir: ./test/scripts #default: ./scripts
+
+tasks:
+  exec: echo orig pizza
