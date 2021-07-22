@@ -1,0 +1,20 @@
+{
+  "name": "mk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "yarn-exclude": "bin/mk.js"
+  },
+  "scripts": {
+    "start": "",
+    "test": "cd test && NODE_ENV=development node ../index.js exec"
+  },
+  "author": "leothorp",
+  "license": "MIT",
+  "dependencies": {
+    "@npmcli/promise-spawn": "^2.0.0",
+    "js-yaml": "^4.1.0",
+    "shelljs": "^0.8.4"
+  }
+}
