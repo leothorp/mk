@@ -1,1 +1,1 @@
-npx nexe index.js --build --clean
+npx nexe index.js --build
