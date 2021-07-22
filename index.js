@@ -58,13 +58,13 @@ const fetchConfigFile = () => {
 };
 
 const normalizeTasks = ({ settings, tasks }) => {
-  console.log(tasks);
+  
   settings = settings || {};
   tasks = tasks || {};
   //TODO(lt): vvv handle when running from not same dir as mk.yml
   const { scripts_dir: scriptsDir = path.resolve(process.cwd(), "scripts") } =
     settings;
-  console.log(scriptsDir);
+  
   //TODO(lt): vvv recursive
   const foundScripts = getFiles(scriptsDir);
   const asTasks = toObj(
@@ -85,10 +85,10 @@ const cli = (processArgs) => {
   const taskName = rawTask.trim();
   const config = fetchConfigFile();
   const tasks = normalizeTasks(config);
-  console.log("tn", taskName, tasks);
+  
 
   const definedTasks = Object.keys(tasks);
-  console.log(tasks, "cnf", taskName);
+  
   invariant(definedTasks.includes(taskName), "Undefined task:", taskName);
   const taskVal = tasks[taskName];
   //TODO(lt): other interpreters
@@ -96,7 +96,7 @@ const cli = (processArgs) => {
   //TODO(lt): vvv handle env vars, test w input
   //TODO(lt): vvv set cwd?
   const taskParts = taskVal.split(" ");
-  console.log(taskParts,'tpp')
+  
   //TODO(lt): vvv args off-by-one/not forwarding when it's a script file. check yarn
   //cmd impl?
   //TODO(lt): vvv quote handling, "shell" features alongside passing additional args (taskArgs var)
