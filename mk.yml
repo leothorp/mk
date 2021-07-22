@@ -2,4 +2,5 @@ settings: #default empty
   scripts_dir: ./test/scripts #default: ./scripts
 
 tasks:
+  build: nexe --help
   exec: echo orig pizza
