@@ -1,4 +1,5 @@
-#_config: 
-  #mk_root:
-   
-exec: cat ../index.js
+config: #default empty
+  script_dir: #default: cwd
+
+tasks:
+  exec: cat ../index.js
