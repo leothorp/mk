@@ -4,8 +4,7 @@ const path = require("path");
 var glob = require("glob");
 
 const { spawnSync } = require("child_process");
-//TODO(lt): read local node_modules bin into PATH temporarily?
-//combine with direnv?
+
 const getFiles = (dir) => {
   const results = glob.sync(`**/*.{sh,js,py}`, { cwd: dir });
 
@@ -36,8 +35,7 @@ const invariant = (cond, msg) => {
 };
 
 const fetchConfigFile = () => {
-  //TODO(lt): allow other file locations
-  //TODO(lt): allow running from anywhere in the parent dir, not just top level.
+
   const getConfAt = (path) => yaml.load(fs.readFileSync(path, "utf8"));
   let config;
   const invalidFileErr = "No valid mk.yml configuration file found.";
@@ -59,31 +57,31 @@ const fetchConfigFile = () => {
 const normalizeTasks = ({ settings, tasks }) => {
   settings = settings || {};
   tasks = tasks || {};
-  //TODO(lt): vvv handle when running from not same dir as mk.yml
+  
   const { scripts_dir: scriptsDir = path.resolve(process.cwd(), "scripts") } =
     settings;
 
   const getExecutor = (ext) => {
     return {
-      //TODO(lt): vvv less brittle way to get these, using which or something
+      
       ".js": "/usr/local/bin/node",
       ".sh": "/bin/sh",
     }[ext];
   };
 
-  //TODO(lt): vvv recursive
+  
   const foundScripts = getFiles(scriptsDir);
   const asTasks = toObj(
     foundScripts,
     (k) => path.basename(k, path.extname(k)),
-    //TODO(lt): vvv sec. issue w executable chars in names
+    
     (k) => `${getExecutor(path.extname(k))} ${k}`
   );
   return { ...tasks, ...asTasks };
 };
 
 const cli = (processArgs) => {
-  //TODO(lt): vvv run multiple in sequence ?
+  
   const args = processArgs.slice(2);
   const taskArgs = args.slice(1);
   const rawTask = args[0];
@@ -96,20 +94,14 @@ const cli = (processArgs) => {
 
   invariant(definedTasks.includes(taskName), "Undefined task:", taskName);
   const taskVal = tasks[taskName];
-  //TODO(lt): other interpreters
 
-  //TODO(lt): vvv handle env vars, test w input
-  //TODO(lt): vvv set cwd?
   const taskParts = taskVal.split(" ");
 
-  //TODO(lt): vvv args off-by-one/not forwarding when it's a script file. check yarn
-  //cmd impl?
-  //TODO(lt): vvv quote handling, "shell" features alongside passing additional args (taskArgs var)
   spawnSync(taskParts[0], taskParts.slice(1), {
     stdio: "inherit",
     shell: "/bin/sh",
   });
-  //TODO(lt): check out exec at
+  
   //https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/node_modules/%40npmcli/run-script/lib/run-script-pkg.js#L12
 };
 
