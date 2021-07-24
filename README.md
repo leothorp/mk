@@ -1,4 +1,4 @@
 # mk
 
-Super-concise project-level task automation/scripting tool. Typing Considered Harmful.
+Project-level task automation for those who don't want to type.
 
