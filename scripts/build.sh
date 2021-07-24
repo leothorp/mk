@@ -1,1 +1,1 @@
-npx nexe index.js --build
+npx nexe bin/mk.js -t mac-x64-10.14.0
