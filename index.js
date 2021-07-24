@@ -2,9 +2,7 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 const path = require("path");
 var glob = require("glob");
-// const promiseSpawn = require("@npmcli/promise-spawn");
-// source for inlining arbitrary shell commands: https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/lib/run-script.js#L128
-//xplat: https://shapeshed.com/writing-cross-platform-node/#cross-platform-if-you-want
+
 const { spawnSync } = require("child_process");
 //TODO(lt): read local node_modules bin into PATH temporarily?
 //combine with direnv?

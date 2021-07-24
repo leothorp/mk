@@ -1,6 +1,6 @@
 settings: #default empty
   # scripts_dir: ./test/scripts #default: ./scripts
-#js_shebang value, sh shebang value
+
 tasks:
- # build: node_modules/bin/nexe --help
+  build: node_modules/bin/nexe --help
   exec: echo orig pizza
