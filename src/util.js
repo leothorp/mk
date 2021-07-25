@@ -1,12 +1,11 @@
-//TODO(lt): vvv explore sync vs. async more here
 const { spawnSync, spawn } = require("child_process");
 
 const isDev = () => process.env.NODE_ENV === "development";
 const mkExec = (cmd) => {
-  if (isDev()) {
-    //TODO(lt): remove below
-    console.error("executing:", cmd);
-  }
+  //   if (isDev()) {
+  //     //TODO(lt): remove below
+  //     console.error("executing:", cmd);
+  //   }
   return spawn(cmd, [], { stdio: "inherit", shell: true });
 };
 const testExec = (cmd) => {

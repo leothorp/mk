@@ -53,7 +53,6 @@ const normalizeTasks = ({ settings, tasks }) => {
     return {
       ".js": "/usr/bin/env node",
       ".sh": "/usr/bin/env bash",
-      //TODO(lt): vvv may not work on linux
       ".py": "/usr/bin/env python3",
     }[ext];
   };
@@ -84,14 +83,7 @@ const cli = (processArgs) => {
 
   //incorporates additional ones added after
   const compositeTaskVal = taskVal.split(" ").concat(additionalArgs).join(" ");
-  //TODO(lt): vvv test
-  // spawnSync(taskParts[0], taskParts.slice(1), {
-  // spawnSync(taskVal, [], {
-  //   stdio: "inherit",
-  //   //TODO(lt): vvv test
-  //   // shell: "/bin/sh",
-  //   shell: true,
-  // });
+
   mkExec(compositeTaskVal);
 
   //https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/node_modules/%40npmcli/run-script/lib/run-script-pkg.js#L12
