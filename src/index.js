@@ -1,8 +1,8 @@
 const yaml = require("js-yaml");
 const fs = require("fs");
 const path = require("path");
-var glob = require("glob");
-
+const glob = require("glob");
+const version = require("../package.json").version;
 const { mkExec, invariant, thr } = require("./util");
 
 const getFiles = (dir) => {
@@ -45,8 +45,15 @@ const normalizeTasks = ({ settings, tasks }) => {
   settings = settings || {};
   tasks = tasks || {};
 
-  const { scripts_dir: scriptsDir = path.resolve(process.cwd(), "scripts") } =
-    settings;
+  const {
+    auto_scripts_enabled: autoScriptsEnabled = true,
+    scripts_dir: scriptsDir = path.resolve(process.cwd(), "scripts"),
+  } = settings;
+
+  console.log("vally", autoScriptsEnabled, typeof autoScriptsEnabled);
+  if (!autoScriptsEnabled) {
+    return tasks;
+  }
 
   const getExecutor = (ext) => {
     return {
@@ -65,10 +72,23 @@ const normalizeTasks = ({ settings, tasks }) => {
   return { ...tasks, ...asTasks };
 };
 
+const printVersion = () => {
+  // const version = JSON.parse(
+  //   fs.readFileSync("../package.json", "utf8")
+  // ).version;
+  console.log(version);
+};
+
 const cli = (processArgs) => {
   const args = processArgs.slice(2);
   const additionalArgs = args.slice(1);
   const rawTask = args[0];
+
+  //temp
+  if (["-v", "--version"].includes(rawTask)) {
+    printVersion();
+    return;
+  }
   invariant(!!rawTask, `No task name specified.`);
   const taskName = rawTask.trim();
   const config = fetchConfigFile();

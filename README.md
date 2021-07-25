@@ -41,19 +41,23 @@ These "partial command" tasks can be handy for the really repetitive stuff that 
 
 ### External Scripts
 
-Naturally sometimes you have a script that is more involved than a
-shell oneliner, and put it in its own file.
+Sometimes you have a script that is more involved than a
+shell oneliner, and put it in its own file in a scripts directory. `
 
-If I create the file `./scripts/build.sh` with this (arbitrary) content:
+mk`will automatically detect .py, .js, and .sh files in a`scripts` directory at root and make those available as tasks- you don't need to add anything to mk.yml. (this script directory path is configurable- see the "Configuration" section)
+
+_Example:_
+If I create the file `scripts/build.sh` with this (arbitrary) content:
 
 ```
 rm -rf node_modules;
 npx nexe bin/mk.js -t mac-x64-10.14.0 -o dist/mk;
 ```
 
-I could add something like this to make it an `mk` task; you've probably
-done this in npm scripts/other tools.
+I can already trigger it with `mk build`.
 
+It's equivalent to if I had added something like this to mk.yml (which you can still do if you like, but it isn't needed for it to work). The same goes
+for .py and .js scripts.
 `mk.yml`
 
 ```
@@ -61,71 +65,19 @@ tasks:
   build: bash ./scripts/build.sh
 ```
 
-Now I can just do `mk build`.
+### Configuration
 
-`mk` can pick these
-up automatically and make them available to call, as if you'd created
-an entry in `tasks` for that file.
-
-### Usage
-
-If we have the following `workspaces` config:
+`mk.yml` can optionally include a `settings` object, with the
+following possible keys.
 
 ```
-  "workspaces": {
-    "packages": [
-      "packages/one",
-      "packages/two",
-      "packages/three"
-    ],
-    "nohoist": ["react"]
-  },
+settings:
+  auto_scripts_enabled: false #enable/disable reading from the scripts dir. defaults to true.
+  scripts_dir: "./tools/my-scripts"      #relative path to the auto-detected 'scripts' directory. defaults to './scripts'.
 ```
 
-And we run:
+### CLI
 
-```
-//bypass interactive prompt for CI
-NPM_CONFIG_YES=true npx yarn-exclude --exclude one,two
-```
-
-The result is equivalent to having a `workspaces` config of:
-
-```
-  "workspaces": {
-    "packages": [
-      "packages/three"
-    ],
-    "nohoist": ["react"]
-  },
-```
-
-and running `yarn install`.
-
-Glob and array notation for `workspaces` will also work.
-
-```
-  "workspaces": [
-      "packages/*"
-  },
-```
-
-### CLI Options
-
-`-e --exclude <excluded packages>` Comma separated list of excluded package
-dirnames. (Required)
-
-`--cwd <directory>` workspace root directory. (Default:
-current working directory)
-
-`--modify` Leave yarn.lock and package.json modifications in place after the operation completes. May be useful in some CI environments.
-
-`-V, --version` output the version number
-
-`-h, --help` display help for command options
-
-### Caveats
-
-- This package isn't actively maintained- you probably shouldn't use it for anything other than experimenting.
-- Passing additional CLI options to the underlying `yarn install` is not currently supported.
-- `yarn-exclude` will not check if the excluded workspace is actually depended upon or not by any of the included ones; you'll have to make sure of that yourself before running this.
+`mk <task> <...args>` Run the given mk task, optionally forwarding
+one or more arguments.
+`mk -v, --version` Print version number.
