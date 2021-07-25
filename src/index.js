@@ -67,7 +67,6 @@ const normalizeTasks = ({ settings, tasks }) => {
 
 const cli = (processArgs) => {
   const args = processArgs.slice(2);
-  console.error("passed args: ", args);
   const additionalArgs = args.slice(1);
   const rawTask = args[0];
   invariant(!!rawTask, `No task name specified.`);

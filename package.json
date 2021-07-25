@@ -19,10 +19,10 @@
     "outputPath": "dist"
   },
   "scripts": {
-    "start": "",
-    "run-mk": "NODE_ENV=development mk",
-    "build": "bash ./scripts/build.sh",
-    "//test": "cd test && NODE_ENV=development node ../index.js ssss",
+    "start": "node ./bin/mk.js",
+    "run-mk": "NODE_ENV=development node ./bin/mk.js",
+    "build": "npm test && bash ./scripts/build.sh",
+    "build-publish": "npm test && bash ./scripts/build.sh",
     "test": "cd test/_test-proj-fixture && NODE_ENV=development node ../basic.test.js"
   },
   "husky": {
