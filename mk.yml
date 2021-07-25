@@ -1,2 +1,5 @@
 tasks:
-  foo: echo "barca"
+  dinner: echo "tomato"
+  cra: npx create-react-app new-one
+  save-work-bad-msg: git add . && git commit -m "typo"
+  save-work: git add . && git commit -m
