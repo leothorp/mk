@@ -1,6 +1,6 @@
 {
   "name": "mk-task",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Project-level task automation for those who don't want to type.",
   "main": "index.js",
   "bin": {
