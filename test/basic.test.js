@@ -13,6 +13,8 @@ const checkStdout = (received, expected) => {
   console.log("Passed");
 };
 
+testExec("cd _test-proj-fixture && pwd");
+
 //check .py script
 const result1 = testExec("mk indeed");
 

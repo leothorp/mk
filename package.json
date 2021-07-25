@@ -21,7 +21,7 @@
   "scripts": {
     "start": "node ./bin/mk.js",
     "run-mk": "NODE_ENV=development node ./bin/mk.js",
-    "test": "cd test/_test-proj-fixture && NODE_ENV=development node ../basic.test.js"
+    "test": "NODE_ENV=development node test/basic.test.js"
   },
   "husky": {
     "hooks": {
