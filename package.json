@@ -1,6 +1,6 @@
 {
   "name": "@leothorp/mk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Project-level task automation for those who don't want to type.",
   "main": "index.js",
   "bin": {
