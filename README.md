@@ -10,9 +10,13 @@ that are useful in the current directory/project. Like with Make, there's no ass
 
 ### Installation
 
+via npm (recommended):
+
 ```
   npm i -g @leothorp/mk
 ```
+
+Alternatively for a binary installation that doesn't require npm, check out the instructions in `scripts/path-install.sh`.
 
 ### Basic Tasks
 
