@@ -17,6 +17,11 @@
     "//test": "cd test && NODE_ENV=development node ../index.js ssss",
     "test": "cd test/_test-proj-fixture && NODE_ENV=development node ../basic.test.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "author": "leothorp",
   "license": "MIT",
   "dependencies": {
@@ -24,6 +29,7 @@
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "jasmine": "^3.8.0"
+    "husky": "^4.3.8",
+    "pretty-quick": "^3.1.1"
   }
 }
