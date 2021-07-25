@@ -1,26 +1,29 @@
 {
   "name": "mk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project-level task automation for those who don't want to type.",
   "main": "index.js",
   "bin": {
     "mk": "./bin/mk.js"
   },
-  "files": {
+  "files": [
     "./bin/*",
-    index.js
-  },
+    "./src/*"
+  ],
   "scripts": {
     "start": "",
     "run-mk": "mk",
     "build": "bash ./scripts/build.sh",
-    "test": "cd test && NODE_ENV=development node ../index.js ssss"
+    "//test": "cd test && NODE_ENV=development node ../index.js ssss",
+    "test": "cd test/_test-proj-fixture && NODE_ENV=development node ../basic.test.js"
   },
   "author": "leothorp",
   "license": "MIT",
   "dependencies": {
     "glob": "^7.1.7",
-    "js-yaml": "^4.1.0",
-    "shelljs": "^0.8.4"
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.8.0"
   }
 }

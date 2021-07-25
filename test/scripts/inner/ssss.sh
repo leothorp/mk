@@ -1,1 +1,0 @@
-echo inner "pTTTT" $2

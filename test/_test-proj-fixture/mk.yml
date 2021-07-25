@@ -1,0 +1,5 @@
+settings: #default empty
+  scripts_dir: ./my-scripts
+
+tasks:
+  exec: echo orig

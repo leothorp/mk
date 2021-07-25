@@ -4,6 +4,7 @@ const path = require("path");
 var glob = require("glob");
 
 const { spawnSync } = require("child_process");
+const { mkExec, invariant, thr } = require("./util");
 
 const getFiles = (dir) => {
   const results = glob.sync(`**/*.{sh,js,py}`, { cwd: dir });
@@ -21,21 +22,11 @@ const toObj = (arr, keySelector = identity, valSelector = identity) => {
     return acc;
   }, {});
 };
-const thr = (...msgs) => {
-  console.error("ERROR:", ...msgs);
-  if (process.env.NODE_ENV === "development") {
-    throw new Error();
-  }
-  process.exit(1);
-};
-const invariant = (cond, msg) => {
-  if (!cond) {
-    thr(msg);
-  }
-};
+
+
+
 
 const fetchConfigFile = () => {
-
   const getConfAt = (path) => yaml.load(fs.readFileSync(path, "utf8"));
   let config;
   const invalidFileErr = "No valid mk.yml configuration file found.";
@@ -57,31 +48,32 @@ const fetchConfigFile = () => {
 const normalizeTasks = ({ settings, tasks }) => {
   settings = settings || {};
   tasks = tasks || {};
-  
+
   const { scripts_dir: scriptsDir = path.resolve(process.cwd(), "scripts") } =
     settings;
 
   const getExecutor = (ext) => {
     return {
-      
-      ".js": "/usr/local/bin/node",
-      ".sh": "/bin/sh",
+      // ".js": "/usr/local/bin/node",
+      // ".sh": "/bin/sh",
+      ".js": "/usr/bin/env node",
+      ".sh": "/usr/bin/env bash",
+      //TODO(lt): vvv may not work on linux
+      ".py": "/usr/bin/env python3",
     }[ext];
   };
 
-  
   const foundScripts = getFiles(scriptsDir);
   const asTasks = toObj(
     foundScripts,
     (k) => path.basename(k, path.extname(k)),
-    
+
     (k) => `${getExecutor(path.extname(k))} ${k}`
   );
   return { ...tasks, ...asTasks };
 };
 
 const cli = (processArgs) => {
-  
   const args = processArgs.slice(2);
   const taskArgs = args.slice(1);
   const rawTask = args[0];
@@ -96,11 +88,15 @@ const cli = (processArgs) => {
   const taskVal = tasks[taskName];
 
   const taskParts = taskVal.split(" ");
-
-  spawnSync(taskParts[0], taskParts.slice(1), {
-    stdio: "inherit",
-    shell: "/bin/sh",
-  });
+  //TODO(lt): vvv test
+  // spawnSync(taskParts[0], taskParts.slice(1), {
+  // spawnSync(taskVal, [], {
+  //   stdio: "inherit",
+  //   //TODO(lt): vvv test
+  //   // shell: "/bin/sh",
+  //   shell: true,
+  // });
+  mkExec(taskVal)
   
   //https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/node_modules/%40npmcli/run-script/lib/run-script-pkg.js#L12
 };
