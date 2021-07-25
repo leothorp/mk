@@ -37,6 +37,13 @@ So if I do
 `mk save-work "typo"`
 
 It'll be as if I'd typed git add . && git commit -m "typo".
+I often find these "partial command" tasks useful for the really repetitive stuff that still has a manual component.
+
+_Security Warning_
+
+Though the direct shell forwarding is convenient, be very careful
+not to run these with any sort of dynamic or external input. Anything
+typed will be injected into the shell as-is:
 
 This library provides a way to exclude packages in a yarn monorepo when running `yarn install`, only installing dependencies for the desired workspaces. The main intended use case is for easily deploying a single workspace to a CI environment.
 
