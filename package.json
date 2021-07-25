@@ -1,5 +1,5 @@
 {
-  "name": "mk-task",
+  "name": "@leothorp/mk",
   "version": "1.0.3",
   "description": "Project-level task automation for those who don't want to type.",
   "main": "index.js",
