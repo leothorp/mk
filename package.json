@@ -6,15 +6,19 @@
   "bin": {
     "mk": "./bin/mk.js"
   },
+  "files": {
+    "./bin/*",
+    index.js
+  },
   "scripts": {
     "start": "",
     "run-mk": "mk",
+    "build": "bash ./scripts/build.sh",
     "test": "cd test && NODE_ENV=development node ../index.js ssss"
   },
   "author": "leothorp",
   "license": "MIT",
   "dependencies": {
-    "@npmcli/promise-spawn": "^2.0.0",
     "glob": "^7.1.7",
     "js-yaml": "^4.1.0",
     "shelljs": "^0.8.4"
