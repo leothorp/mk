@@ -4,9 +4,9 @@ Project-level task automation for those who don't want to type.
 
 ### What is this?
 
-Essentially this is a more terse form of npm scripts or Make tasks-
-a quicker way to define arbitrary commands, shortcuts, and script aliases
-that are useful in the current directory/project.
+Essentially this is a more terse version of npm scripts or Make tasks-
+a quick way to define arbitrary commands, shortcuts, and script aliases
+that are useful in the current directory/project. Like with Make, there's no assumption about what language is being used. an mk.yml file in the project root is the only requirement.
 
 ### Installation
 
@@ -14,7 +14,7 @@ that are useful in the current directory/project.
   npm i -g @leothorp/mk
 ```
 
-### Getting Started
+### Basic Tasks
 
 Add an mk.yml file at your project root.
 
@@ -37,17 +37,35 @@ So if I do
 `mk save-work "typo"`
 
 It'll be as if I'd typed git add . && git commit -m "typo".
-I often find these "partial command" tasks useful for the really repetitive stuff that still has a manual component.
+These "partial command" tasks can be handy for the really repetitive stuff that still has a manual/unpredictable component.
 
-_Security Warning_
+### External Scripts
 
-Though the direct shell forwarding is convenient, be very careful
-not to run these with any sort of dynamic or external input. Anything
-typed will be injected into the shell as-is:
+Naturally sometimes you have a script that is more involved than a
+shell oneliner, and put it in its own file.
 
-This library provides a way to exclude packages in a yarn monorepo when running `yarn install`, only installing dependencies for the desired workspaces. The main intended use case is for easily deploying a single workspace to a CI environment.
+If I create the file `./scripts/build.sh` with this (arbitrary) content:
 
-This is accomplished by temporarily modifying package.json to only contain the non-excluded workspaces before running `yarn install` (essentially simulating what would happen if the excluded packages were never present in the first place).
+```
+rm -rf node_modules;
+npx nexe bin/mk.js -t mac-x64-10.14.0 -o dist/mk;
+```
+
+I could add something like this to make it an `mk` task; you've probably
+done this in npm scripts/other tools.
+
+`mk.yml`
+
+```
+tasks:
+  build: bash ./scripts/build.sh
+```
+
+Now I can just do `mk build`.
+
+`mk` can pick these
+up automatically and make them available to call, as if you'd created
+an entry in `tasks` for that file.
 
 ### Usage
 

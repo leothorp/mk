@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 var glob = require("glob");
 
-const { spawnSync } = require("child_process");
 const { mkExec, invariant, thr } = require("./util");
 
 const getFiles = (dir) => {
@@ -85,8 +84,6 @@ const cli = (processArgs) => {
   const compositeTaskVal = taskVal.split(" ").concat(additionalArgs).join(" ");
 
   mkExec(compositeTaskVal);
-
-  //https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/node_modules/%40npmcli/run-script/lib/run-script-pkg.js#L12
 };
 
 module.exports = cli;

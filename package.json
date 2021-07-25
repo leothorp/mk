@@ -10,9 +10,17 @@
     "./bin/*",
     "./src/*"
   ],
+  "pkg": {
+    "scripts": [],
+    "assets": "views/**/*",
+    "targets": [
+      "node14-linux-arm64"
+    ],
+    "outputPath": "dist"
+  },
   "scripts": {
     "start": "",
-    "run-mk": "mk",
+    "run-mk": "NODE_ENV=development mk",
     "build": "bash ./scripts/build.sh",
     "//test": "cd test && NODE_ENV=development node ../index.js ssss",
     "test": "cd test/_test-proj-fixture && NODE_ENV=development node ../basic.test.js"

@@ -1,6 +1,7 @@
 const { spawnSync, spawn } = require("child_process");
 
 const isDev = () => process.env.NODE_ENV === "development";
+
 const mkExec = (cmd) => {
   //   if (isDev()) {
   //     //TODO(lt): remove below
