@@ -1,6 +1,6 @@
 {
   "name": "mk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Project-level task automation for those who don't want to type.",
   "main": "index.js",
   "bin": {
