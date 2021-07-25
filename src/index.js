@@ -23,9 +23,6 @@ const toObj = (arr, keySelector = identity, valSelector = identity) => {
   }, {});
 };
 
-
-
-
 const fetchConfigFile = () => {
   const getConfAt = (path) => yaml.load(fs.readFileSync(path, "utf8"));
   let config;
@@ -54,8 +51,6 @@ const normalizeTasks = ({ settings, tasks }) => {
 
   const getExecutor = (ext) => {
     return {
-      // ".js": "/usr/local/bin/node",
-      // ".sh": "/bin/sh",
       ".js": "/usr/bin/env node",
       ".sh": "/usr/bin/env bash",
       //TODO(lt): vvv may not work on linux
@@ -67,7 +62,6 @@ const normalizeTasks = ({ settings, tasks }) => {
   const asTasks = toObj(
     foundScripts,
     (k) => path.basename(k, path.extname(k)),
-
     (k) => `${getExecutor(path.extname(k))} ${k}`
   );
   return { ...tasks, ...asTasks };
@@ -75,7 +69,8 @@ const normalizeTasks = ({ settings, tasks }) => {
 
 const cli = (processArgs) => {
   const args = processArgs.slice(2);
-  const taskArgs = args.slice(1);
+  console.error("passed args: ", args);
+  const additionalArgs = args.slice(1);
   const rawTask = args[0];
   invariant(!!rawTask, `No task name specified.`);
   const taskName = rawTask.trim();
@@ -87,7 +82,8 @@ const cli = (processArgs) => {
   invariant(definedTasks.includes(taskName), "Undefined task:", taskName);
   const taskVal = tasks[taskName];
 
-  const taskParts = taskVal.split(" ");
+  //incorporates additional ones added after
+  const compositeTaskVal = taskVal.split(" ").concat(additionalArgs).join(" ");
   //TODO(lt): vvv test
   // spawnSync(taskParts[0], taskParts.slice(1), {
   // spawnSync(taskVal, [], {
@@ -96,8 +92,8 @@ const cli = (processArgs) => {
   //   // shell: "/bin/sh",
   //   shell: true,
   // });
-  mkExec(taskVal)
-  
+  mkExec(compositeTaskVal);
+
   //https://github.com/npm/cli/blob/1a2159d3cf2513e77e728e7feeaa04ad150d3812/node_modules/%40npmcli/run-script/lib/run-script-pkg.js#L12
 };
 

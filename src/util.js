@@ -4,17 +4,18 @@ const { spawnSync, spawn } = require("child_process");
 const isDev = () => process.env.NODE_ENV === "development";
 const mkExec = (cmd) => {
   if (isDev()) {
-    console.debug("executing:", cmd);
+    //TODO(lt): remove below
+    console.error("executing:", cmd);
   }
   return spawn(cmd, [], { stdio: "inherit", shell: true });
 };
-const testExec = (cmd, { inherit = false } = {}) => {
+const testExec = (cmd) => {
   return spawnSync(cmd, [], {
-    ...(inherit ? { stdio: "inherit" } : { encoding: "utf8" }),
+    encoding: "utf8",
     shell: true,
   });
 };
-testExec;
+
 const thr = (...msgs) => {
   console.error("ERROR:", ...msgs);
   if (isDev()) {
