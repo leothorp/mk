@@ -1,5 +1,5 @@
 settings:
   auto_scripts_enabled: true
 tasks:
-  build-test: npm test && mk build
-  build-publish: mk build-test && mk publish
+  build-test: npm test && ./dist/mk-macosmk build
+  build-publish: ./dist/mk-macos build-test && ./dist/mk-macos publish
