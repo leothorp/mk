@@ -1,3 +1,5 @@
 settings:
   auto_scripts_enabled: false
 tasks:
+  build: npm test && bash ./scripts/build.sh
+  build-publish: npm test && bash ./scripts/build.sh

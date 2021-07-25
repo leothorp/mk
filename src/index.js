@@ -50,7 +50,6 @@ const normalizeTasks = ({ settings, tasks }) => {
     scripts_dir: scriptsDir = path.resolve(process.cwd(), "scripts"),
   } = settings;
 
-  console.log("vally", autoScriptsEnabled, typeof autoScriptsEnabled);
   if (!autoScriptsEnabled) {
     return tasks;
   }
@@ -73,9 +72,6 @@ const normalizeTasks = ({ settings, tasks }) => {
 };
 
 const printVersion = () => {
-  // const version = JSON.parse(
-  //   fs.readFileSync("../package.json", "utf8")
-  // ).version;
   console.log(version);
 };
 
