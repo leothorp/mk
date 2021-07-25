@@ -10,18 +10,10 @@
     "./bin/*",
     "./src/*"
   ],
-  "pkg": {
-    "scripts": [],
-    "assets": "views/**/*",
-    "targets": [
-      "node14-linux-arm64"
-    ],
-    "outputPath": "dist"
-  },
   "scripts": {
     "start": "node ./bin/mk.js",
     "run-mk": "NODE_ENV=development node ./bin/mk.js",
-    "test": "NODE_ENV=development node test/basic.test.js"
+    "test": "cd test/_test-proj-fixture && NODE_ENV=development node ../basic.test.js"
   },
   "husky": {
     "hooks": {

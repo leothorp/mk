@@ -68,6 +68,8 @@ const normalizeTasks = ({ settings, tasks }) => {
     (k) => path.basename(k, path.extname(k)),
     (k) => `${getExecutor(path.extname(k))} ${k}`
   );
+  //TODO(lt): revert below
+  console.error(asTasks, tasks, "72");
   return { ...tasks, ...asTasks };
 };
 
@@ -79,6 +81,7 @@ const cli = (processArgs) => {
   const args = processArgs.slice(2);
   const additionalArgs = args.slice(1);
   const rawTask = args[0];
+  console.error(84);
 
   //temp
   if (["-v", "--version"].includes(rawTask)) {
