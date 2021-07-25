@@ -1,5 +1,5 @@
 settings:
   auto_scripts_enabled: true
 tasks:
-  build-test: npm test && mk build
+  build-test: npm test && mk-build
   build-publish: mk build-test && mk publish
