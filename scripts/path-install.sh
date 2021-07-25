@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-
-echo https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-$2.zip
-curl -sSL https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-$2.zip -O \
-&& unzip mk-$2.zip -d /usr/local/bin \
-&& mv /usr/local/bin mk-$2 /usr/local/bin/mk \
-&& rm mk-$2.zip && mk --version;
+platform="macos"
+echo https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-$platform.zip
+curl -sSL https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-$platform.zip -O \
+&& unzip mk-$platform.zip -d /usr/local/bin \
+&& mv /usr/local/bin mk-$platform /usr/local/bin/mk \
+&& rm mk-$platform.zip && mk --version;
 
 
 
