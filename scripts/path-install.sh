@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-npx nexe bin/mk.js -t mac-x64-10.14.0 -o dist/mk
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
