@@ -1,6 +1,6 @@
 # mk
 
-Project-level task automation for those who don't want to type.
+Project-level task automation with less typing.
 
 ### What is this?
 
@@ -16,14 +16,15 @@ via npm (recommended):
   npm i -g @leothorp/mk
 ```
 
-Alternatively for a binary installation that doesn't require npm, check out the instructions in `scripts/path-install.sh`.
+For a binary installation that doesn't require Node/npm to already be installed, check out the instructions in `scripts/path-install.sh`.
 
 ### Basic Tasks
 
-Add an mk.yml file at your project root.
+Add an mk.yml file at the project root.
 
-This should contain a `tasks` key, an object of task names mapped to shell input strings. For example:
+This will contain a `tasks` object, a mapping of task names to shell commands. 
 
+_Example:_
 ```
 tasks:
   dinner: echo "tomato"
@@ -36,34 +37,26 @@ Now in the terminal, I can type
 
 and see the output `tomato`- as if I'd manually typed `echo "tomato"`.
 
-Any additional arguments will be forwarded along to the end of the command.
-So if I do
-`mk save-work "typo"`
+Any additional arguments are forwarded along to the end of the command.
+If I do
+```mk save-work "typo"```
 
-It'll be as if I'd typed git add . && git commit -m "typo".
-These "partial command" tasks can be handy for the really repetitive stuff that still has a manual/unpredictable component.
+It'll be as if I'd typed 
+```git add . && git commit -m "typo"```
+These "partial command" tasks can be useful for repetitive tasks that still have a small manual/unpredictable component.
 
 ### External Scripts
 
 Sometimes you have a script that is more involved than a
-shell oneliner, and put it in its own file in a scripts directory. `
-
-mk`will automatically detect .py, .js, and .sh files in a`scripts` directory at root and make those available as tasks- you don't need to add anything to mk.yml. (this script directory path is configurable- see the "Configuration" section)
+shell oneliner, and put it in its own file in a scripts directory. `mk` will automatically detect .py, .js, and .sh files in a `scripts` directory at root and make those available as tasks, without anything needing to be added to mk.yml. 
+(this script directory path is configurable- see the "Configuration" section below.)
 
 _Example:_
-If I create the file `scripts/build.sh` with this (arbitrary) content:
+If I create the file `scripts/build.sh`, I can run that script by typing `mk build`.
 
-```
-rm -rf node_modules;
-npx nexe bin/mk.js -t mac-x64-10.14.0 -o dist/mk;
-```
-
-I can already trigger it with `mk build`.
-
-It's equivalent to if I had added something like this to mk.yml (which you can still do if you like, but it isn't needed for it to work). The same goes
+It's equivalent to if I had added something like this the following to mk.yml. The same goes
 for .py and .js scripts.
 `mk.yml`
-
 ```
 tasks:
   build: bash ./scripts/build.sh
@@ -74,14 +67,22 @@ tasks:
 `mk.yml` can optionally include a `settings` object, with the
 following possible keys.
 
+-`scripts_dir:` Default: `./scripts`
+  Path to a directory in the project containing script files that should be automatically defined as mk tasks.
+
+-`auto_scripts_enabled:` Default: `true` 
+  This is used to enable/disable the scripts_dir/automatic task functionality.
+
+_Example:_
 ```
 settings:
-  auto_scripts_enabled: false #enable/disable reading from the scripts dir. defaults to true.
-  scripts_dir: "./tools/my-scripts"      #relative path to the auto-detected 'scripts' directory. defaults to './scripts'.
+  auto_scripts_enabled: true 
+  scripts_dir: "./tools/my-scripts"   
 ```
 
-### CLI
+### CLI commands
 
-`mk <task> <...args>` Run the given mk task, optionally forwarding
+-`mk <task> <...args>` Run the given mk task, optionally forwarding
 one or more arguments.
-`mk -v, --version` Print version number.
+
+-`mk -v, --version` Print version number.
