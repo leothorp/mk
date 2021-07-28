@@ -1,5 +1,6 @@
 settings:
   auto_scripts_enabled: true
 tasks:
-  build-publish: mk build && mk publish
+  build-commit: mk build && git add . && git commit -m
+  build-publish: mk build-commit
   with-arg: echo
