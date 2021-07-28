@@ -9,3 +9,5 @@ curl -sSL https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-
 && unzip -j mk-$platform.zip dist/mk-$platform -d /usr/local/bin \
 && mv /usr/local/bin/mk-$platform /usr/local/bin/mk \
 && rm mk-$platform.zip && mk --version
+
+# bash <(wget -qO- https://raw.githubusercontent.com/leothorp/mk/main/scripts/path-install.sh)
