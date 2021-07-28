@@ -2,13 +2,14 @@
   "name": "@leothorp/mk",
   "version": "0.1.4",
   "description": "Project-level task automation with less typing.",
-  "main": "index.js",
+  "main": "src/index.js",
   "bin": {
-    "mk": "./bin/mk.js"
+    "@leothorp/mk": "bin/mk",
+    "mk": "bin/mk"
   },
   "files": [
-    "./bin/*",
-    "./src/*"
+    "bin/",
+    "src/"
   ],
   "scripts": {
     "start": "node ./bin/mk.js",
@@ -19,6 +20,9 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "leothorp",
   "license": "MIT",
