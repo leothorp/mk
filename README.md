@@ -20,9 +20,9 @@ For a binary installation that doesn't require Node/npm to already be installed,
 
 ### Basic Tasks
 
-Add an mk.yml file at the project root.
+Add a file called `mk.yml` at the project root.
 
-This will contain a `tasks` object, a mapping of task names to shell commands. 
+This should contain, at minimum, a `tasks` object, a mapping of task names to shell commands. 
 
 _Example:_
 ```
