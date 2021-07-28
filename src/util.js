@@ -3,7 +3,7 @@ const { spawnSync, spawn } = require("child_process");
 const isDev = () => process.env.NODE_ENV === "development";
 
 const mkExec = (cmd) => {
-  return spawn(cmd, [], { stdio: "inherit", shell: "/bin/sh" });
+  return spawn(cmd, [], { stdio: "inherit", shell: true });
 };
 const testExec = (cmd) => {
   return spawnSync(cmd, [], {
