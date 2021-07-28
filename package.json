@@ -4,12 +4,12 @@
   "description": "Project-level task automation with less typing.",
   "main": "src/index.js",
   "bin": {
-    "@leothorp/mk": "bin/mk",
-    "mk": "bin/mk"
+    "@leothorp/mk": "bin/mk.js",
+    "mk": "bin/mk.js"
   },
   "files": [
-    "bin/",
-    "src/"
+    "bin/*",
+    "src/*"
   ],
   "scripts": {
     "start": "node ./bin/mk.js",
@@ -28,7 +28,8 @@
   "license": "MIT",
   "dependencies": {
     "glob": "^7.1.7",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "husky": "^4.3.8",
