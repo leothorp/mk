@@ -56,7 +56,6 @@ If I create the file `scripts/build.sh`, I can run that script by typing `mk bui
 
 It's equivalent to if I had added something like this the following to mk.yml. The same goes
 for .py and .js scripts.
-`mk.yml`
 ```
 tasks:
   build: bash ./scripts/build.sh
