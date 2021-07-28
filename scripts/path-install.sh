@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-#1. replace "PLATFORM" below with either "macos", "linux", or "win.exe" depending on your machine.
-#2. run that updated script in bash. on mac and linux at least, 'mk' should now be in your PATH globally.
-platform="macos" && curl -sSL https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-$platform.zip -O \
+#1. replace the value of the 'platform' variable on line 5 below with either "macos" or "linux", depending on your machine.
+#2. run this script in bash.
+
+echo "Enter desired installation platform. possible values are macos, linux, or win.exe"
+read platform;
+
+curl -sSL https://raw.githubusercontent.com/leothorp/mk/main/dist/compressed/mk-$platform.zip -O \
 && unzip -j mk-$platform.zip dist/mk-$platform -d /usr/local/bin \
 && mv /usr/local/bin/mk-$platform /usr/local/bin/mk \
 && rm mk-$platform.zip && mk --version;

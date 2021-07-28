@@ -1,7 +1,7 @@
 {
   "name": "@leothorp/mk",
   "version": "0.1.3",
-  "description": "Project-level task automation for those who don't want to type.",
+  "description": "Project-level task automation with less typing.",
   "main": "index.js",
   "bin": {
     "mk": "./bin/mk.js"
