@@ -100,7 +100,7 @@ const cli = (processArgs) => {
 
   //incorporates additional ones added after
   const compositeTaskVal = taskVal.split(" ").concat(additionalArgs).join(" ");
-
+  console.log("cc", compositeTaskVal);
   mkExec(compositeTaskVal);
 };
 
