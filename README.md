@@ -48,7 +48,7 @@ These "partial command" tasks can be useful for repetitive tasks that still have
 ### External Scripts
 
 Sometimes you have a script that is more involved than a
-shell oneliner, and put it in its own file in a scripts directory. `mk` will automatically detect .py, .js, and .sh files in a `scripts` directory at root and make those available as tasks, without anything needing to be added to mk.yml. 
+shell one-liner, so you put it in its own file in in the project. `mk` will automatically detect any .py, .js, or .sh files in a `scripts` directory at the porject root and make those available as tasks, without anything needing to be added to `mk.yml`. 
 (this script directory path is configurable- see the "Configuration" section below.)
 
 _Example:_
